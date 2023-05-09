@@ -38,6 +38,20 @@ Chapter 4: Working with AWS Services
 Chapter 5: Scaling and Monitoring the Application
 
     Overview of scalability and monitoring
+    
+    
+    Scaling Mongodb using Replicaset approach 
+            +----------------+     +----------------+     +----------------+
+        |    Primary     |     |    Secondary   |     |    Secondary   |
+        |    Node 1      |     |    Node 2      |     |    Node 3      |
+        |                |     |                |     |                |
+        +-------^--------+     +-------^--------+     +-------^--------+
+                |                      |                      |
+                |                      |                      |
++---------------+----------------------+----------------------+
+|                      Replica Set                             |
++--------------------------------------------------------------+
+
     Configuring Elastic Beanstalk to scale the application
     Using CloudWatch to monitor application performance
     Adding alarms to alert when thresholds are exceeded
