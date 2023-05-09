@@ -52,6 +52,9 @@ Chapter 5: Scaling and Monitoring the Application
 |                      Replica Set                             |
 +--------------------------------------------------------------+
 
+
+
+
     Configuring Elastic Beanstalk to scale the application
     Using CloudWatch to monitor application performance
     Adding alarms to alert when thresholds are exceeded
