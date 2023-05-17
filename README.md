@@ -19,10 +19,19 @@ The objective of the project is to develop a scalable web application in Golang 
 
 ## Chapter 2: Building the Simulator
 
-    Overview of the simulator and its purpose
-    How to install and use the simulator
-    Customizing data generation with JavaScript functions
-    Configuring the simulator to send data to AWS services
+The simulator is a valuable tool for IoT projects as it allows for testing and development without the need for physical devices. It offers the following benefits:
+
+    Avoids the need to run physical equipment for unit or early integration testing.
+    Enables the use of synthetic generated data or replayed captured data for testing purposes.
+    Simulates a large number of devices by adding randomization.
+    Allows data replay at different frequencies to expedite testing.
+    Facilitates testing at different stages of the system, enabling the development and evaluation of various components independently.    How to install and use the simulator. 
+    
+link to simulator repo : https://github.com/IBA-Group-IT/IoT-data-simulator.
+you just need to run the following commands in order to run the simulator: 
+docker-compose pull
+docker-compose up
+
 
 ## Chapter 3: Developing the Golang Application
 
