@@ -5,11 +5,17 @@ Introduction
 The objective of the project is to develop a scalable web application in Golang that can receive data from an external IoT data simulator. To streamline and expedite the application's deployment to production, we plan to implement Continuous Integration and Continuous Deployment (CI/CD) using AWS CodePipeline. Our primary goal is to automate the deployment process and minimize the time spent on manual deployments. We also want to ensure that the application can easily handle increasing traffic as user numbers grow. To accomplish this, we intend to leverage AWS services such as CodePipeline and CodeBuild for deployment automation, while relying on MongoDB as our database to securely and reliably store the IoT data. Our focus is on building a seamless and dependable pipeline for deployment and scalability, without utilizing Elastic Beanstalk.
 
 Chapter 1: Setting Up the Environment
+   1- Creating an AWS account: You can sign up for an AWS account by visiting the official AWS website at https://aws.amazon.com/ and clicking on the "Create an AWS Account" button.
 
-    Creating an AWS account
-    Installing the AWS CLI
-    Creating an IAM user and assigning permissions
-    Installing Golang and MongoDB locally
+  2-  Installing the AWS CLI: For instructions on installing the AWS CLI, you can refer to the official AWS CLI User Guide at https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
+
+  3-  Creating an IAM user and assigning permissions: The AWS IAM User Guide provides detailed instructions on creating IAM users and managing their permissions. You can find it at https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+
+  4-  Installing Golang: To install Golang, you can visit the official Golang website at https://golang.org/ and follow the installation instructions provided for your specific operating system.
+
+  5-   Installing MongoDB: For instructions on installing MongoDB, you can refer to the MongoDB documentation at https://docs.mongodb.com/manual/installation/
+
+
 
 Chapter 2: Building the Simulator
 
