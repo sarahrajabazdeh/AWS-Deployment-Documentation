@@ -2,8 +2,7 @@
 A comprehensive guide to setting up and deploying a scalable Golang web application with MongoDB on AWS.
 Introduction
 
-    Brief description of the project and its purpose
-    Overview of the technologies used (Golang, AWS services, MongoDB)
+The objective of the project is to develop a scalable web application in Golang that can receive data from an external IoT data simulator. To streamline and expedite the application's deployment to production, we plan to implement Continuous Integration and Continuous Deployment (CI/CD) using AWS CodePipeline. Our primary goal is to automate the deployment process and minimize the time spent on manual deployments. We also want to ensure that the application can easily handle increasing traffic as user numbers grow. To accomplish this, we intend to leverage AWS services such as CodePipeline and CodeBuild for deployment automation, while relying on MongoDB as our database to securely and reliably store the IoT data. Our focus is on building a seamless and dependable pipeline for deployment and scalability, without utilizing Elastic Beanstalk.
 
 Chapter 1: Setting Up the Environment
 
