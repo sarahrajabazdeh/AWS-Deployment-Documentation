@@ -96,7 +96,34 @@ We repeated these installation steps on the other two EC2 instances to ensure co
 Once the MongoDB instances were installed, we proceeded with setting up the ReplicaSet. In the primary instance, we executed the add.initialize() command, which initialized the ReplicaSet and designated the first instance as the primary node. This command kickstarts the process of electing the primary node and ensures data replication among the instances.
 
 By following this installation and configuration process, we established a ReplicaSet with three EC2 instances running MongoDB in a primary-secondary configuration.
+For adding new replica:
+Connect to the primary node:
 
+css
+
+mongo --host <primary-node-hostname> --port <primary-node-port>
+
+Authenticate with the appropriate user credentials, if necessary.
+
+Add a replica node using the rs.add() command:
+
+csharp
+
+rs.add("<replica-node-hostname>:<replica-node-port>")
+
+Replace <replica-node-hostname> and <replica-node-port> with the hostname and port of the replica node you want to add. Ensure that the replica node is accessible from the primary node.
+
+Optionally, you can add more replica nodes using the same rs.add() command for each additional node.
+
+Monitor the ReplicaSet status to verify the addition of the new replica nodes:
+
+lua
+
+rs.status()
+
+This command provides information about the current ReplicaSet configuration, including the primary node, secondary nodes, and their statuses.
+
+Confirm the successful addition of the replica nodes by checking the output of rs.status(). The new replicas should be listed as secondary nodes and actively replicating data from the primary.
 
 The primary node handles all write operations and serves as the source of truth for data updates. It replicates these updates to the secondary nodes, ensuring that they have an up-to-date copy of the data. The secondary nodes are available for read operations and can also step in as the primary in case of a failure or during planned maintenance.
 
