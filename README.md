@@ -55,16 +55,21 @@ Chapter 5: Scaling and Monitoring the Application
     
     
     Scaling Mongodb using Replicaset approach 
-            +----------------+     +----------------+     +----------------+
-        |    Primary     |     |    Secondary   |     |    Secondary   |
-        |    Node 1      |     |    Node 2      |     |    Node 3      |
-        |                |     |                |     |                |
-        +-------^--------+     +-------^--------+     +-------^--------+
-                |                      |                      |
-                |                      |                      |
-+---------------+----------------------+----------------------+
-|                      Replica Set                             |
-+--------------------------------------------------------------+
+
+       Overview of scalability and monitoring
+
+  Scaling MongoDB using ReplicaSet approach
+    +---------------------+     +---------------------+     +---------------------+
+    |  mongo (eu-south-1c) |     |   rep1 (eu-south-1a) |     |   rep2 (eu-south-1b) |
+    |   (Primary)         |     |   (Secondary)        |     |   (Secondary)        |
+    |                     |     |                      |     |                      |
+    +-----------^---------+     +-----------^----------+     +-----------^----------+
+                |                            |                            |
+                |                            |                            |
+                +----------------------------|----------------------------+
+                                             |
+                                             |
+                                     Replication and Sync
 
 To scale our MongoDB infrastructure, we opted to use a ReplicaSet. A ReplicaSet consists of multiple nodes, including a primary node and one or more secondary nodes, that work together to provide data redundancy, high availability, and increased read scalability.
 
