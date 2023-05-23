@@ -66,11 +66,47 @@ Chapter 5: Scaling and Monitoring the Application
 |                      Replica Set                             |
 +--------------------------------------------------------------+
 
-for example in this diagram, the replica set consists of three MongoDB nodes, where one of the nodes is the primary node, and the other two are secondary nodes. The primary node is responsible for handling all write operations and replicating the changes to the secondary nodes. The secondary nodes receive and replicate the changes made on the primary node to maintain data redundancy and high availability.
+To scale our MongoDB infrastructure, we opted to use a ReplicaSet. A ReplicaSet consists of multiple nodes, including a primary node and one or more secondary nodes, that work together to provide data redundancy, high availability, and increased read scalability.
 
-In case the primary node fails, one of the secondary nodes is automatically elected as the new primary node, and the replica set continues to function without interruption. The election process is based on a voting mechanism, where each replica set member has a vote, and the member with the most votes becomes the new primary node.
+In our setup, we have two secondary nodes located in  eu-south-1a and eu-south-1b availability zones, along with a primary node. It is recommended to place these nodes within the same region to minimize network latency and ensure efficient data synchronization. Additionally, for improved fault tolerance, it is advisable to distribute the nodes across different availability zones within the region.
+For our ReplicaSet implementation, we utilized three EC2 instances on the Amazon Ubuntu operating system, each equipped with 8GB of RAM. We ensured that the security group settings were consistent across all instances for seamless communication.
 
-Overall, a replica set provides a way to distribute data across multiple MongoDB nodes, enabling automatic failover and maintaining data redundancy to ensure high availability and data durability.
+1- To install MongoDB on each instance, we followed these steps:
+ We initiated an SSH connection to the EC2 instance using the command:
+ssh -i "key.pem" [root@ec2ip.eu-south-1.compute.amazonaws.com](mailto:root@ec2ip.eu-south-1.compute.amazonaws.com)
+2- Once connected, we edited the MongoDB repository file using the command:
+
+sudo vi /etc/yum.repos.d/mongodb-org-4.4.repo
+3- Inside the editor, we copied the following configuration:
+[mongodb-org-4.4]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
+
+4- After saving the file, we proceeded to install MongoDB using the command:
+sudo yum install -y mongodb-org
+5- Next, we started the MongoDB service with the command:
+sudo systemctl start mongod
+6- To verify the successful installation, we checked the MongoDB status by running:
+mongo
+We repeated these installation steps on the other two EC2 instances to ensure consistency across the ReplicaSet.
+
+Once the MongoDB instances were installed, we proceeded with setting up the ReplicaSet. In the primary instance, we executed the add.initialize() command, which initialized the ReplicaSet and designated the first instance as the primary node. This command kickstarts the process of electing the primary node and ensures data replication among the instances.
+
+By following this installation and configuration process, we established a ReplicaSet with three EC2 instances running MongoDB in a primary-secondary configuration.
+
+
+The primary node handles all write operations and serves as the source of truth for data updates. It replicates these updates to the secondary nodes, ensuring that they have an up-to-date copy of the data. The secondary nodes are available for read operations and can also step in as the primary in case of a failure or during planned maintenance.
+
+To maintain data consistency and integrity, the ReplicaSet follows a consensus-based approach. This means that for any changes or updates to be considered valid, they must be replicated and acknowledged by a majority of the nodes within the ReplicaSet. This ensures that data remains consistent across the nodes, even in the event of failures or network partitions.
+
+In case the primary node becomes unavailable due to a failure or maintenance, an automatic election process takes place. The remaining nodes participate in the election to select a new primary node. Once a new primary is elected, it resumes accepting write operations and continues replicating data to the secondary nodes.
+
+By distributing the workload across the primary and secondary nodes, the ReplicaSet enables us to handle higher read traffic and provides fault tolerance. Additionally, the use of multiple secondary nodes allows for data redundancy and mitigates the risk of data loss.
+
+Overall, our ReplicaSet architecture provides scalability, high availability, and data redundancy, making it a robust solution for our MongoDB infrastructure.
 
 
     Configuring Elastic Beanstalk to scale the application
