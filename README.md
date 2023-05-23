@@ -59,6 +59,7 @@ Chapter 5: Scaling and Monitoring the Application
        Overview of scalability and monitoring
 
   Scaling MongoDB using ReplicaSet approach
+  
     +---------------------+     +---------------------+     +---------------------+
     |  mongo (eu-south-1c) |     |   rep1 (eu-south-1a) |     |   rep2 (eu-south-1b) |
     |   (Primary)         |     |   (Secondary)        |     |   (Secondary)        |
