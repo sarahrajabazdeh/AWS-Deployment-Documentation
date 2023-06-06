@@ -2,7 +2,7 @@
 A comprehensive guide to setting up and deploying a scalable Golang web application with MongoDB on AWS.
 Introduction
 
-The objective of the project is to develop a scalable web application in Golang that can receive data from an external IoT data simulator. To streamline and expedite the application's deployment to production, we plan to implement Continuous Integration and Continuous Deployment (CI/CD) using AWS CodePipeline. Our primary goal is to automate the deployment process and minimize the time spent on manual deployments. We also want to ensure that the application can easily handle increasing traffic as user numbers grow. To accomplish this, we intend to leverage AWS services such as CodePipeline and CodeBuild for deployment automation, while relying on MongoDB as our database to securely and reliably store the IoT data. Our focus is on building a seamless and dependable pipeline for deployment and scalability, without utilizing Elastic Beanstalk.
+The objective of the project is to develop a scalable web application in Golang that can receive data from an external IoT data simulator. To streamline and expedite the application's deployment to production, we plan to implement Continuous Integration and Continuous Deployment (CI/CD) using AWS CodePipeline. Our primary goal is to automate the deployment process and minimize the time spent on manual deployments.We also want to ensure that the application can easily handle increasing traffic as user numbers grow. To accomplish this, we intend to leverage AWS services such as CodePipeline and CodeBuild for deployment automation, while relying on MongoDB as our database to securely and reliably store the IoT data. Our focus is on building a seamless and dependable pipeline for deployment and scalability, without utilizing Elastic Beanstalk.
 
 ## Chapter 1: Setting Up the Environment
    1- Creating an AWS account: You can sign up for an AWS account by visiting the official AWS website at https://aws.amazon.com/ and clicking on the "Create an AWS Account" button.
@@ -32,8 +32,26 @@ you just need to run the following commands in order to run the simulator:
 docker-compose pull
 docker-compose up
 
+## Chapter 3: General Architecture
+ 1-  The end user initiates an HTTPS request to access our application.
 
-## Chapter 3: Developing the Golang Application
+ 2- The request is routed to an Application Load Balancer (ALB) in AWS. The ALB acts as the entry point for incoming requests and performs load balancing to distribute the requests among a group of target instances.
+
+ 3-  We have defined a target group, which represents a logical collection of instances capable of handling requests. This target group is associated with Elastic Container Service (ECS).
+
+ 4-  Within ECS, we have defined two tasks. A task is a blueprint for running containers. Each task represents an instance of our Golang web application.
+
+ 5-   Our Golang web application is packaged and deployed as a Docker image. The Docker image is stored in Elastic Container Registry (ECR), which is a managed Docker container registry provided by AWS.
+
+ 6-    ECS, using Fargate, runs the containers based on the defined tasks. Fargate is a serverless compute engine for containers, allowing us to deploy and manage containers without provisioning or managing the underlying infrastructure.
+
+ 7-   The Golang web app containers deployed by ECS can now process the user's request. They can interact with other services, such as accessing data from MongoDB.
+
+ 8-  MongoDB is hosted on EC2 instances, which are virtual servers provided by AWS. We have set up MongoDB instances as replicasets, which means they contain the same data and provide redundancy and high availability.
+
+ 9- The MongoDB replicasets are distributed across three different availability zones (AZs), which are isolated locations within an AWS region. This distribution ensures that even if one AZ experiences an issue, the replicasets in other AZs can continue to serve data.
+
+## Chapter 4: Developing the Golang Application
 
     Overview of the application and its purpose
     Setting up a Golang project
@@ -41,7 +59,7 @@ docker-compose up
     Creating middleware for token validation
     Writing handlers for device creation and data storage
 
-Chapter 4: Working with AWS Services
+Chapter 5: Working with AWS Services
 
     Overview of AWS services used in the project (Elastic Beanstalk, CodePipeline, CodeBuild)
     Creating an Elastic Beanstalk environment
@@ -49,7 +67,7 @@ Chapter 4: Working with AWS Services
     Configuring CodeBuild to build the Golang application
     Adding MongoDB as an Elastic Beanstalk environment variable
 
-Chapter 5: Scaling and Monitoring the Application
+Chapter 6: Scaling and Monitoring the Application
 
     Overview of scalability and monitoring
     
@@ -58,7 +76,7 @@ Chapter 5: Scaling and Monitoring the Application
 
        Overview of scalability and monitoring
 
-  Scaling MongoDB using ReplicaSet approach
+  Chapter 7: Scaling MongoDB using ReplicaSet approach
   
     +---------------------+     +---------------------+     +---------------------+
     |  mongo (eu-south-1c) |     |   rep1 (eu-south-1a) |     |   rep2 (eu-south-1b) |
