@@ -64,8 +64,26 @@ docker-compose up
    Once the service layer has processed the request, it returns the response to the controller.
 
    The controller prepares the response based on the result from the service layer and sends it back to the client as an HTTP response.
+   Useful files or packages: 
+   * Make File :
+     - This Makefile provides a set of commands for building, testing, and running a Go application. Here's a summary of the available commands:
+     Here's a summary of the available commands:
 
-Chapter 5: Working with AWS Services
+    help: Displays a list of available commands.
+    run: Executes the Go application using go run.
+    build: Builds the application into an executable file.
+    trivy: Runs the Trivy tool to scan for possible vulnerabilities in the code.
+    ci: Runs additional checks on the code, including semgrep, lint, and trivy.
+    semgrep: Runs semgrep to check for vulnerabilities using specific configurations.
+    lint: Runs the linter golangci-lint to check for code quality issues.
+    prepare_test: Prepares the unit tests folder.
+    test: Prepares the tests and runs unit tests.
+    launch: Builds the Go app and launches Docker containers containing the app and MongoDB replica set.
+    shutdown: Stops and cleans up the Docker containers running the Go app and MongoDB replica set.
+    conf: Generates a configuration file.
+    docs: Generates Swagger documentation for the API using swag init.
+
+## Chapter 5: Working with AWS Services
 
     Overview of AWS services used in the project (Elastic Beanstalk, CodePipeline, CodeBuild)
     Creating an Elastic Beanstalk environment
