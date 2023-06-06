@@ -53,11 +53,17 @@ docker-compose up
 
 ## Chapter 4: Developing the Golang Application
 
-    Overview of the application and its purpose
-    Setting up a Golang project
-    Designing the REST API
-    Creating middleware for token validation
-    Writing handlers for device creation and data storage
+  Router:  An incoming request is received by the router, which determines the appropriate controller to handle the request based on the endpoint.
+
+  Controller :The controller receives the request and extracts any necessary data from it. It then delegates the execution of the business logic to the corresponding service.
+
+  Service:  The service layer performs operations on the data received from the controller. This can include interacting with the database to fetch or modify data and applying business rules or computations.
+
+   If necessary, the service layer may interact with external services or APIs to complete its tasks.
+
+   Once the service layer has processed the request, it returns the response to the controller.
+
+   The controller prepares the response based on the result from the service layer and sends it back to the client as an HTTP response.
 
 Chapter 5: Working with AWS Services
 
