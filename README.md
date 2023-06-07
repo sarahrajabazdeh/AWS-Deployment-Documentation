@@ -54,6 +54,7 @@ docker-compose up
 9- The MongoDB replicasets are distributed across three different availability zones (AZs), which are isolated locations within an AWS region. This distribution ensures that even if one AZ experiences an issue, the replicasets in other AZs can continue to serve data.
 
 ## Chapter 4: Developing the Golang Application
+<a href="https://ibb.co/yFQNSPn"><img src="https://i.ibb.co/YBLNZQ7/10.png" alt="10" border="0"></a>
 
   Router:  An incoming request is received by the router, which determines the appropriate controller to handle the request based on the endpoint.
 
