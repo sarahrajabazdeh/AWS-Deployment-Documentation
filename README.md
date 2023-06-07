@@ -105,14 +105,13 @@ docker-compose up
 
    CodeBuild:
         Reason for using: We are using CodeBuild as a fully managed build service that compiles our source code, runs tests, and produces software packages. We use CodeBuild as part of our CI/CD pipeline to build our Golang web application and generate the necessary artifacts for deployment.
-Chapter 6: Scaling and Monitoring the Application
+## Chapter 6: Scaling and Monitoring the Application
     
     
     Scaling Mongodb using Replicaset approach 
 
-       Overview of scalability and monitoring
 
-  Chapter 7: Scaling MongoDB using ReplicaSet approach
+  ## Chapter 7: Scaling MongoDB using ReplicaSet approach
   
     +---------------------+     +---------------------+     +---------------------+
     |  mongo (eu-south-1c) |     |   rep1 (eu-south-1a) |     |   rep2 (eu-south-1b) |
@@ -145,5 +144,6 @@ By distributing the workload across the primary and secondary nodes, the Replica
 
 Overall, our ReplicaSet architecture provides scalability, high availability, and data redundancy, making it a robust solution for our MongoDB infrastructure.
 
-Conclusion
+## Conclusion
+
 In conclusion, by utilizing AWS services such as ECS, Fargate, CodePipeline, ECR, EC2, and CodeBuild, we have established a robust infrastructure for deploying and managing our Golang web application. ECS and Fargate enable seamless container deployment and scaling, while CodePipeline automates our CI/CD pipeline for efficient software delivery. ECR serves as a reliable container registry for storing and deploying container images. Additionally, we leverage EC2 instances to host our MongoDB replica set, ensuring scalable and customizable database hosting. CodeBuild completes our CI/CD workflow by providing a managed build service for compiling source code and generating deployment artifacts. Together, these services empower us to streamline our application deployment, enhance development agility, and achieve greater operational efficiency within our AWS environment.
