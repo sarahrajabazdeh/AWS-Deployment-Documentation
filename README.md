@@ -36,13 +36,21 @@ docker-compose up
 <a href="https://ibb.co/KN2MnnQ"><img src="https://i.ibb.co/q0Nt664/5.png" alt="5" border="0"></a>
 
 1-  The end user initiates an HTTPS request to access our application.
+
 2- The request is routed to an Application Load Balancer (ALB) in AWS. The ALB acts as the entry point for incoming requests and performs load balancing to distribute the requests among a group of target instances.
+
 3-  We have defined a target group, which represents a logical collection of instances capable of handling requests. This target group is associated with Elastic Container Service (ECS).
+
 4-  Within ECS, we have defined two tasks. A task is a blueprint for running containers. Each task represents an instance of our Golang web application.
+
 5-   Our Golang web application is packaged and deployed as a Docker image. The Docker image is stored in Elastic Container Registry (ECR), which is a managed Docker container registry provided by AWS.
+
 6-    ECS, using Fargate, runs the containers based on the defined tasks. Fargate is a serverless compute engine for containers, allowing us to deploy and manage containers without provisioning or managing the underlying infrastructure.
+
 7-   The Golang web app containers deployed by ECS can now process the user's request. They can interact with other services, such as accessing data from MongoDB.
+
 8-  MongoDB is hosted on EC2 instances, which are virtual servers provided by AWS. We have set up MongoDB instances as replicasets, which means they contain the same data and provide redundancy and high availability.
+
 9- The MongoDB replicasets are distributed across three different availability zones (AZs), which are isolated locations within an AWS region. This distribution ensures that even if one AZ experiences an issue, the replicasets in other AZs can continue to serve data.
 
 ## Chapter 4: Developing the Golang Application
