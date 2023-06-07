@@ -87,15 +87,24 @@ docker-compose up
 
 ## Chapter 5: Working with AWS Services
 
-    Overview of AWS services used in the project (Elastic Beanstalk, CodePipeline, CodeBuild)
-    Creating an Elastic Beanstalk environment
-    Creating a CodePipeline for automated deployment
-    Configuring CodeBuild to build the Golang application
-    Adding MongoDB as an Elastic Beanstalk environment variable
+   ECS (Elastic Container Service):
+        Reason for using: We are using ECS to deploy our Golang web application as a containerized task. ECS helps us easily manage and orchestrate the deployment, scaling, and monitoring of our containers.
 
+   Fargate:
+        Reason for using: We are using Fargate as a compute engine for containers, allowing us to run containers without managing the underlying infrastructure. By using Fargate with ECS, we can focus on running our containers without the need to provision or manage EC2 instances.
+
+   CodePipeline:
+        Reason for using: We are using CodePipeline as a fully managed continuous integration and continuous delivery (CI/CD) service. It helps us automate the build, test, and deployment processes for our application. We use CodePipeline to set up a CI/CD pipeline for our Golang web application.
+
+   ECR (Elastic Container Registry):
+        Reason for using: We are using ECR as a fully managed container registry that allows us to store, manage, and deploy container images. We use ECR to push and store our container images, making them available for deployment with ECS.
+
+   EC2 (Elastic Compute Cloud):
+        Reason for using: We are using EC2 instances to set up a MongoDB replica set. EC2 provides virtual servers in the cloud, allowing us to run applications and services, in this case, MongoDB, on scalable and customizable virtual machines.
+
+   CodeBuild:
+        Reason for using: We are using CodeBuild as a fully managed build service that compiles our source code, runs tests, and produces software packages. We use CodeBuild as part of our CI/CD pipeline to build our Golang web application and generate the necessary artifacts for deployment.
 Chapter 6: Scaling and Monitoring the Application
-
-    Overview of scalability and monitoring
     
     
     Scaling Mongodb using Replicaset approach 
