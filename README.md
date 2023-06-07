@@ -131,57 +131,7 @@ To scale our MongoDB infrastructure, we opted to use a ReplicaSet. A ReplicaSet 
 In our setup, we have two secondary nodes located in  eu-south-1a and eu-south-1b availability zones, along with a primary node. It is recommended to place these nodes within the same region to minimize network latency and ensure efficient data synchronization. Additionally, for improved fault tolerance, it is advisable to distribute the nodes across different availability zones within the region.
 For our ReplicaSet implementation, we utilized three EC2 instances on the Amazon Ubuntu operating system, each equipped with 8GB of RAM. We ensured that the security group settings were consistent across all instances for seamless communication.
 
-1- To install MongoDB on each instance, we followed these steps:
- We initiated an SSH connection to the EC2 instance using the command:
-ssh -i "key.pem" [root@ec2ip.eu-south-1.compute.amazonaws.com](mailto:root@ec2ip.eu-south-1.compute.amazonaws.com)
-2- Once connected, we edited the MongoDB repository file using the command:
-
-sudo vi /etc/yum.repos.d/mongodb-org-4.4.repo
-3- Inside the editor, we copied the following configuration:
-[mongodb-org-4.4]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.4/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
-
-4- After saving the file, we proceeded to install MongoDB using the command:
-sudo yum install -y mongodb-org
-5- Next, we started the MongoDB service with the command:
-sudo systemctl start mongod
-6- To verify the successful installation, we checked the MongoDB status by running:
-mongo
-We repeated these installation steps on the other two EC2 instances to ensure consistency across the ReplicaSet.
-
 Once the MongoDB instances were installed, we proceeded with setting up the ReplicaSet. In the primary instance, we executed the add.initialize() command, which initialized the ReplicaSet and designated the first instance as the primary node. This command kickstarts the process of electing the primary node and ensures data replication among the instances.
-
-By following this installation and configuration process, we established a ReplicaSet with three EC2 instances running MongoDB in a primary-secondary configuration.
-For adding new replica:
-Connect to the primary node:
-
-css
-
-mongo --host <primary-node-hostname> --port <primary-node-port>
-
-Authenticate with the appropriate user credentials, if necessary.
-
-Add a replica node using the rs.add() command:
-
-csharp
-
-rs.add("<replica-node-hostname>:<replica-node-port>")
-
-Replace <replica-node-hostname> and <replica-node-port> with the hostname and port of the replica node you want to add. Ensure that the replica node is accessible from the primary node.
-
-Optionally, you can add more replica nodes using the same rs.add() command for each additional node.
-
-Monitor the ReplicaSet status to verify the addition of the new replica nodes:
-
-lua
-
-rs.status()
-
-This command provides information about the current ReplicaSet configuration, including the primary node, secondary nodes, and their statuses.
 
 Confirm the successful addition of the replica nodes by checking the output of rs.status(). The new replicas should be listed as secondary nodes and actively replicating data from the primary.
 
@@ -195,13 +145,5 @@ By distributing the workload across the primary and secondary nodes, the Replica
 
 Overall, our ReplicaSet architecture provides scalability, high availability, and data redundancy, making it a robust solution for our MongoDB infrastructure.
 
-
-    Configuring Elastic Beanstalk to scale the application
-    Using CloudWatch to monitor application performance
-    Adding alarms to alert when thresholds are exceeded
-
 Conclusion
-
-    Recap of the project and its components
-    Key takeaways from working with AWS services and Golang
-    Suggestions for further development and improvement of the application.
+In conclusion, by utilizing AWS services such as ECS, Fargate, CodePipeline, ECR, EC2, and CodeBuild, we have established a robust infrastructure for deploying and managing our Golang web application. ECS and Fargate enable seamless container deployment and scaling, while CodePipeline automates our CI/CD pipeline for efficient software delivery. ECR serves as a reliable container registry for storing and deploying container images. Additionally, we leverage EC2 instances to host our MongoDB replica set, ensuring scalable and customizable database hosting. CodeBuild completes our CI/CD workflow by providing a managed build service for compiling source code and generating deployment artifacts. Together, these services empower us to streamline our application deployment, enhance development agility, and achieve greater operational efficiency within our AWS environment.
